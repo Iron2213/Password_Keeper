@@ -13,10 +13,11 @@ import java.util.List;
 
 public class SQLite_IO extends SQLiteOpenHelper {
 
-    public static String DATABASE_NAME = "PasswordKeeper";
+    private static String DATABASE_NAME = "PasswordKeeper";
+    private static SQLiteDatabase mDataBase;
 
     public class TableNames {
-        public static final String Passwords = "Password";
+        static final String Passwords = "Password";
     }
 
     public SQLite_IO(Context context) {
@@ -56,7 +57,7 @@ public class SQLite_IO extends SQLiteOpenHelper {
      * This method updates an item with the data the user as modified/insert.
      * @param newPassword the item to modify
      */
-    public void updateRow(@NonNull Items newPassword) {
+    public boolean updateRow(@NonNull Items newPassword) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
 
@@ -65,7 +66,9 @@ public class SQLite_IO extends SQLiteOpenHelper {
         values.put("Email", newPassword.getEmail());
         values.put("Password", newPassword.getPassword());
 
-        int i = db.update(TableNames.Passwords, values, "Id = " + newPassword.getID(), null);
+        int result = db.update(TableNames.Passwords, values, "Id = " + newPassword.getID(), null);
+
+        return result != -1;
     }
 
     /**
@@ -98,10 +101,12 @@ public class SQLite_IO extends SQLiteOpenHelper {
      *
      * @param ID Row's ID.
      */
-    public void deleteRow(long ID) {
+    public boolean deleteRow(long ID) {
         SQLiteDatabase db = getWritableDatabase();
 
-        db.delete(TableNames.Passwords, "Id = " + ID, null);
+        int result = db.delete(TableNames.Passwords, "Id = " + ID, null);
+
+        return result != -1;
     }
 
     /**

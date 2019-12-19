@@ -142,25 +142,40 @@ public class MainActivity extends AppCompatActivity {
                     //
                     final int position = viewHolder.getAdapterPosition();
                     final Items removedItem = Utility.DataSet.get(position);
-                    Utility.DataSet.remove(position);
-                    mDB_IO.deleteRow(removedItem.getID());
-                    mAdapter.notifyItemRemoved(position);
 
-                    final Snackbar snackbar = Snackbar.make(findViewById(R.id.llMainLayout), "Item removed", 5000);
-                    snackbar.getView().setBackground(ContextCompat.getDrawable(mContextMainActivity, R.color.actionBarColor));
-                    snackbar.setAction("Undo", new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Utility.DataSet.add(position, removedItem);
-                            mDB_IO.insertRow(removedItem);
-                            mAdapter.notifyItemInserted(position);
-                            if (position == 0) {
-                                mRecyclerView.smoothScrollToPosition(0);
+                    if(!mDB_IO.deleteRow(removedItem.getID())) {
+                        Toast.makeText(mContextMainActivity, "An error occurred, unable to remove the password", Toast.LENGTH_LONG).show();
+                    }
+                    else {
+                        // I delete the item in the dataset and local DB
+                        Utility.DataSet.remove(position);
+
+                        // I notify that an item as been removed from the dataset
+                        mAdapter.notifyItemRemoved(position);
+
+                        final Snackbar snackbar = Snackbar.make(findViewById(R.id.llMainLayout), "Item removed", 5000);
+                        snackbar.getView().setBackground(ContextCompat.getDrawable(mContextMainActivity, R.color.actionBarColor));
+                        snackbar.setAction("Undo", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                // If the user clicked the undo button i insert the removed item in the dataset and in the local DB
+                                Utility.DataSet.add(position, removedItem);
+                                if(!mDB_IO.insertRow(removedItem)) {
+                                    Toast.makeText(mContextMainActivity, "An error occurred, unable to add a new password", Toast.LENGTH_LONG).show();
+                                }
+
+                                // I notify that an item as been inserted in the dataset
+                                mAdapter.notifyItemInserted(position);
+
+                                if (position == 0) {
+                                    mRecyclerView.smoothScrollToPosition(0);
+                                }
                             }
-                        }
-                    });
+                        });
 
-                    snackbar.show();
+                        snackbar.show();
+                    }
+
                     break;
 
                 case ItemTouchHelper.RIGHT:
@@ -197,6 +212,7 @@ public class MainActivity extends AppCompatActivity {
                     txtEmail.setText(item.getEmail());
                     txtPassword.setText(item.getPassword());
 
+                    // Listener for the save button
                     btnSave.setOnClickListener(new View.OnClickListener() {
 
                         @Override
@@ -229,6 +245,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                     });
 
+                    // Listener for the cancel button
                     btnCancel.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -237,6 +254,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                     });
 
+                    // I notify that the items in the dataset have been changed
                     mAdapter.notifyItemChanged(viewHolder.getAdapterPosition());
 
                     dialog.show();
@@ -273,6 +291,7 @@ public class MainActivity extends AppCompatActivity {
         ItemTouchHelper touchHelper = new ItemTouchHelper(simpleItemTouchCallback);
         touchHelper.attachToRecyclerView(mRecyclerView);
 
+        // If the dataset has items inside it i hide the 'No passwords' message
         if (Utility.DataSet.size() > 0) {
             mLblEmptyMessage.setVisibility(View.GONE);
         }
@@ -304,6 +323,7 @@ public class MainActivity extends AppCompatActivity {
                 Button btnCancel = dialog.findViewById(R.id.btnCancel);
                 Button btnSave = dialog.findViewById(R.id.btnSave);
 
+                // Listener for the save button
                 btnSave.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -331,6 +351,8 @@ public class MainActivity extends AppCompatActivity {
                                 // I update the RecyclerView to show the new item, and i play an animation to show it
                                 mAdapter.notifyItemInserted(Utility.DataSet.size() - 1);
                                 mRecyclerView.smoothScrollToPosition(Utility.DataSet.size() - 1);
+
+                                // I close the dialog
                                 dialog.dismiss();
                             } else {
                                 lblError.setVisibility(View.VISIBLE);
@@ -342,10 +364,10 @@ public class MainActivity extends AppCompatActivity {
                             lblError.setVisibility(View.VISIBLE);
                             lblError.setText("Email and password cannot be empty");
                         }
-
                     }
                 });
 
+                // Listener for the cancel button
                 btnCancel.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -357,21 +379,29 @@ public class MainActivity extends AppCompatActivity {
                 break;
 
             case R.id.emptyTable:
-                if (Utility.DataSet.size() > 0)
+
+                // If the dataset is not empty i show the alert dialog for a confirmation
+                if (Utility.DataSet.size() > 0) {
                     new AlertDialog.Builder(this)
                             .setTitle("Delete all passwords")
+                            .setIcon(android.R.drawable.ic_dialog_alert)
                             .setMessage("Are you sure you want to delete all the passwords?\n(This action is irreversible)")
                             .setPositiveButton("DELETE", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
-                                    mDB_IO.deleteAllItems();
+
+                                    // I empty the dataset and local DB
                                     Utility.DataSet.clear();
+                                    mDB_IO.deleteAllItems();
+
+                                    // I notify that the items in the dataset have been deleted
                                     mAdapter.notifyDataSetChanged();
                                     Toast.makeText(mContextMainActivity, "All passwords have been deleted", Toast.LENGTH_LONG).show();
                                 }
                             })
                             .setNegativeButton("CANCEL", null)
-                            .setIcon(android.R.drawable.ic_dialog_alert)
                             .show();
+                }
+
                 else
                     Toast.makeText(this, "No item to delete", Toast.LENGTH_LONG).show();
                 break;
