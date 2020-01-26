@@ -14,7 +14,6 @@ import java.util.List;
 public class SQLite_IO extends SQLiteOpenHelper {
 
     private static String DATABASE_NAME = "PasswordKeeper";
-    private static SQLiteDatabase mDataBase;
 
     public class TableNames {
         static final String Passwords = "Password";

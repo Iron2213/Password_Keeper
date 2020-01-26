@@ -6,7 +6,7 @@
         <bitmap
             android:tint="@android:color/white"
             android:src="@drawable/ic_key"
-            android:gravity="center"/>
+            android:gravity="center" />
     </item>
 
 </layer-list>
