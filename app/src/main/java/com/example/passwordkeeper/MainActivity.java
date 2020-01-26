@@ -143,10 +143,9 @@ public class MainActivity extends AppCompatActivity {
 					final int position = viewHolder.getAdapterPosition();
 					final Items removedItem = Utility.DataSet.get(position);
 
-					if(!mDB_IO.deleteRow(removedItem.getID())) {
+					if (!mDB_IO.deleteRow(removedItem.getID())) {
 						Toast.makeText(mContextMainActivity, "An error occurred, unable to remove the password", Toast.LENGTH_LONG).show();
-					}
-					else {
+					} else {
 						// I delete the item in the dataset and local DB
 						Utility.DataSet.remove(position);
 
@@ -160,7 +159,7 @@ public class MainActivity extends AppCompatActivity {
 							public void onClick(View v) {
 								// If the user clicked the undo button i insert the removed item in the dataset and in the local DB
 								Utility.DataSet.add(position, removedItem);
-								if(!mDB_IO.insertRow(removedItem)) {
+								if (!mDB_IO.insertRow(removedItem)) {
 									Toast.makeText(mContextMainActivity, "An error occurred, unable to add a new password", Toast.LENGTH_LONG).show();
 								}
 
@@ -307,6 +306,18 @@ public class MainActivity extends AppCompatActivity {
 	}
 
 	@Override
+	public boolean onPrepareOptionsMenu(Menu menu) {
+
+		if (Utility.DataSet.size() < 1) {
+			menu.findItem(R.id.mnuEmptyTable).setEnabled(false);
+		} else {
+			menu.findItem(R.id.mnuEmptyTable).setEnabled(true);
+		}
+
+		return super.onPrepareOptionsMenu(menu);
+	}
+
+	@Override
 	public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
 		switch (item.getItemId()) {
@@ -316,7 +327,7 @@ public class MainActivity extends AppCompatActivity {
 
 				try {
 					dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-				} catch (NullPointerException ex) {
+				} catch (Exception ex) {
 					Toast.makeText(mContextMainActivity, ex.getMessage(), Toast.LENGTH_LONG).show();
 				}
 
@@ -378,32 +389,25 @@ public class MainActivity extends AppCompatActivity {
 				dialog.show();
 				break;
 
-			case R.id.emptyTable:
+			case R.id.mnuEmptyTable:
+				new AlertDialog.Builder(this)
+						.setTitle("Delete all passwords")
+						.setIcon(android.R.drawable.ic_dialog_alert)
+						.setMessage("Are you sure you want to delete all the passwords?\n(This action is irreversible)")
+						.setPositiveButton("DELETE", new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog, int which) {
 
-				// If the dataset is not empty i show the alert dialog for a confirmation
-				if (Utility.DataSet.size() > 0) {
-					new AlertDialog.Builder(this)
-							.setTitle("Delete all passwords")
-							.setIcon(android.R.drawable.ic_dialog_alert)
-							.setMessage("Are you sure you want to delete all the passwords?\n(This action is irreversible)")
-							.setPositiveButton("DELETE", new DialogInterface.OnClickListener() {
-								public void onClick(DialogInterface dialog, int which) {
+								// I empty the dataset and local DB
+								Utility.DataSet.clear();
+								mDB_IO.deleteAllItems();
 
-									// I empty the dataset and local DB
-									Utility.DataSet.clear();
-									mDB_IO.deleteAllItems();
-
-									// I notify that the items in the dataset have been deleted
-									mAdapter.notifyDataSetChanged();
-									Toast.makeText(mContextMainActivity, "All passwords have been deleted", Toast.LENGTH_LONG).show();
-								}
-							})
-							.setNegativeButton("CANCEL", null)
-							.show();
-				}
-
-				else
-					Toast.makeText(this, "No item to delete", Toast.LENGTH_LONG).show();
+								// I notify that the items in the dataset have been deleted
+								mAdapter.notifyDataSetChanged();
+								Toast.makeText(mContextMainActivity, "All passwords have been deleted", Toast.LENGTH_LONG).show();
+							}
+						})
+						.setNegativeButton("CANCEL", null)
+						.show();
 				break;
 		}
 

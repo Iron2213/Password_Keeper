@@ -7,11 +7,11 @@
         android:icon="@drawable/ic_add"
         android:iconTint="@color/colorAccent"
         android:iconTintMode="src_atop"
-        app:showAsAction="always"
+        app:showAsAction="ifRoom"
         android:title="New item" />
 
     <item
-        android:id="@+id/emptyTable"
+        android:id="@+id/mnuEmptyTable"
         app:showAsAction="never"
         android:title="Delete saved passwords" />
 
