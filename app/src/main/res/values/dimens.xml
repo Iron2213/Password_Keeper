@@ -1,3 +1,5 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="numPad_button_size">95dp</dimen>
+    <dimen name="numPad_button_margin">18dp</dimen>
 </resources>
