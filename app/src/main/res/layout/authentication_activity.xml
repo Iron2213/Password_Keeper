@@ -33,7 +33,7 @@
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:layout_marginHorizontal="15dp"
-			android:layout_marginTop="55dp"
+			android:layout_marginTop="45dp"
 			android:gravity="center"
 			android:inputType="numberPassword"
 			android:maxLength="26"
@@ -142,6 +142,7 @@
 	</androidx.appcompat.widget.LinearLayoutCompat>
 
 	<androidx.appcompat.widget.LinearLayoutCompat
+		android:layout_marginBottom="10dp"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:gravity="center"

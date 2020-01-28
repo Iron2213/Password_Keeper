@@ -66,8 +66,6 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
 		btnDeleteLast.setOnClickListener(this);
 	}
 
-
-
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
