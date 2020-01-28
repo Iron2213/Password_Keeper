@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android" android:opacity="opaque">
-    <item android:drawable="@android:color/black"/>
+<layer-list
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:opacity="transparent">
+    <item android:drawable="@android:color/transparent"/>
     <item>
 
         <bitmap
-            android:tint="@android:color/white"
+            android:antialias="true"
+            android:tint="?android:attr/textColorPrimary"
             android:src="@drawable/ic_key"
             android:gravity="center" />
+
     </item>
 
 </layer-list>
