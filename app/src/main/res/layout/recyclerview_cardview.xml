@@ -1,102 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/cardView"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:cardCornerRadius="0dp" >
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:id="@+id/cardView"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	app:cardCornerRadius="0dp">
 
-    <LinearLayout
-        android:layout_marginHorizontal="10dp"
-        android:layout_marginVertical="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:weightSum="2">
+	<androidx.appcompat.widget.LinearLayoutCompat
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginHorizontal="10dp"
+		android:layout_marginVertical="10dp"
+		android:orientation="vertical"
+		android:weightSum="2">
 
-        <LinearLayout
-            android:layout_marginBottom="3dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
+		<androidx.appcompat.widget.LinearLayoutCompat
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="3dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:text="Added: "
-                android:textStyle="bold" />
+			<androidx.appcompat.widget.AppCompatTextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="end"
+				android:text="@string/cardview_added_text"
+				android:textSize="18sp"
+				android:textStyle="bold" />
 
-            <TextView
-                android:text="00/00/00"
-                android:id="@+id/lblInsertionDate"
-                android:gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
+			<androidx.appcompat.widget.AppCompatTextView
+				android:id="@+id/lblInsertionDate"
+				android:layout_width="wrap_content"
+				android:layout_height="match_parent"
+				android:gravity="center"
+				android:text="00/00/00" />
 
-        </LinearLayout>
+		</androidx.appcompat.widget.LinearLayoutCompat>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+		<androidx.appcompat.widget.LinearLayoutCompat
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content">
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:orientation="vertical">
+			<androidx.appcompat.widget.LinearLayoutCompat
+				android:layout_width="wrap_content"
+				android:layout_height="match_parent"
+				android:layout_marginStart="5dp"
+				android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:text="Site: "
-                    android:textStyle="bold" />
+				<androidx.appcompat.widget.AppCompatTextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_gravity="end|center_vertical"
+					android:layout_weight="1"
+					android:text="@string/cardview_site_text"
+					android:textSize="16sp"
+					android:textStyle="bold" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:text="Email: "
-                    android:textStyle="bold" />
+				<androidx.appcompat.widget.AppCompatTextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_gravity="end|center_vertical"
+					android:layout_marginVertical="5dp"
+					android:layout_weight="1"
+					android:text="@string/cardview_email_text"
+					android:textSize="16sp"
+					android:textStyle="bold" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:text="Password: "
-                    android:textStyle="bold" />
+				<androidx.appcompat.widget.AppCompatTextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_gravity="end|center_vertical"
+					android:layout_weight="1"
+					android:text="@string/cardview_password_text"
+					android:textSize="16sp"
+					android:textStyle="bold" />
 
 
-            </LinearLayout>
+			</androidx.appcompat.widget.LinearLayoutCompat>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+			<androidx.appcompat.widget.LinearLayoutCompat
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/lblSite"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="MySite" />
+				<androidx.appcompat.widget.AppCompatTextView
+					android:id="@+id/lblSite"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_gravity="end|center_vertical"
+					android:layout_weight="1"
+					android:text="MySite"
+					android:textSize="16sp" />
 
-                <TextView
-                    android:id="@+id/lblEmail"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="MyEmail" />
+				<androidx.appcompat.widget.AppCompatTextView
+					android:id="@+id/lblEmail"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_gravity="end|center_vertical"
+					android:layout_marginVertical="5dp"
+					android:layout_weight="1"
+					android:text="MyEmail"
+					android:textSize="16sp" />
 
-                <TextView
-                    android:id="@+id/lblPassword"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="MyPassword" />
+				<androidx.appcompat.widget.AppCompatTextView
+					android:id="@+id/lblPassword"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_gravity="end|center_vertical"
+					android:layout_weight="1"
+					android:text="MyPassword"
+					android:textSize="16sp" />
 
-            </LinearLayout>
+			</androidx.appcompat.widget.LinearLayoutCompat>
 
-        </LinearLayout>
+		</androidx.appcompat.widget.LinearLayoutCompat>
 
-    </LinearLayout>
+	</androidx.appcompat.widget.LinearLayoutCompat>
 
 </androidx.cardview.widget.CardView>

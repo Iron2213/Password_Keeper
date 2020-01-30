@@ -13,8 +13,8 @@
 		android:orientation="vertical">
 
 		<androidx.appcompat.widget.AppCompatImageView
-			android:layout_width="60dp"
-			android:layout_height="60dp"
+			android:layout_width="65dp"
+			android:layout_height="65dp"
 			android:layout_gravity="center_horizontal"
 			android:layout_marginTop="40dp"
 			android:src="@drawable/splash_screen" />
@@ -24,7 +24,7 @@
 			android:layout_height="wrap_content"
 			android:layout_gravity="center_horizontal"
 			android:layout_marginTop="20dp"
-			android:text="Insert your code"
+			android:text="@string/authentication_insert_code_text"
 			android:textSize="16sp"
 			android:textStyle="bold" />
 

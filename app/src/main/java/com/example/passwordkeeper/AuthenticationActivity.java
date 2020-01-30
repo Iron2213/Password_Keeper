@@ -8,14 +8,14 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatTextView;
 
 public class AuthenticationActivity extends AppCompatActivity implements View.OnClickListener {
 
-	private TextView mLblCode;
+	private AppCompatTextView mCode;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -25,18 +25,20 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
 
 		final Context context = this;
 
-		mLblCode = findViewById(R.id.lblCode);
-		mLblCode.addTextChangedListener(new TextWatcher() {
+		mCode = findViewById(R.id.lblCode);
+		mCode.addTextChangedListener(new TextWatcher() {
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 			}
+
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
-				if(s.toString().equals("1234")) {
+				if (s.toString().equals("1234")) {
 					Intent intent = new Intent(context, MainActivity.class);
 					startActivity(intent);
 				}
 			}
+
 			@Override
 			public void afterTextChanged(Editable s) {
 			}
@@ -70,50 +72,50 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
 	public void onClick(View v) {
 		switch (v.getId()) {
 			case R.id.btnNum0:
-				mLblCode.append("0");
+				mCode.append("0");
 				break;
 
 			case R.id.btnNum1:
-				mLblCode.append("1");
+				mCode.append("1");
 				break;
 
 			case R.id.btnNum2:
-				mLblCode.append("2");
+				mCode.append("2");
 				break;
 
 			case R.id.btnNum3:
-				mLblCode.append("3");
+				mCode.append("3");
 				break;
 
 			case R.id.btnNum4:
-				mLblCode.append("4");
+				mCode.append("4");
 				break;
 
 			case R.id.btnNum5:
-				mLblCode.append("5");
+				mCode.append("5");
 				break;
 
 			case R.id.btnNum6:
-				mLblCode.append("6");
+				mCode.append("6");
 				break;
 
 			case R.id.btnNum7:
-				mLblCode.append("7");
+				mCode.append("7");
 				break;
 
 			case R.id.btnNum8:
-				mLblCode.append("8");
+				mCode.append("8");
 				break;
 
 			case R.id.btnNum9:
-				mLblCode.append("9");
+				mCode.append("9");
 				break;
 
 			case R.id.btnDeleteLast:
-				String text = "" + mLblCode.getText();
+				String text = "" + mCode.getText();
 				if (text.length() > 0) {
 					text = text.substring(0, text.length() - 1);
-					mLblCode.setText(text);
+					mCode.setText(text);
 				}
 				break;
 		}

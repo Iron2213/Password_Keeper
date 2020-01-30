@@ -5,19 +5,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatTextView;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class Adapter extends RecyclerView.Adapter<Adapter.CardHolder> {
-	private View view;
 	private Context mContext;
 
 	@NonNull
 	@Override
 	public Adapter.CardHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+		View view;
 		mContext = parent.getContext();
 
 		view = LayoutInflater.from(mContext).inflate(R.layout.recyclerview_cardview, parent, false);
@@ -42,10 +42,10 @@ public class Adapter extends RecyclerView.Adapter<Adapter.CardHolder> {
 	public class CardHolder extends RecyclerView.ViewHolder {
 
 		public CardView mCardView;
-		public TextView mInsertionDate;
-		public TextView mTxtSite;
-		public TextView mTxtEmail;
-		public TextView mTxtPassword;
+		public AppCompatTextView mInsertionDate;
+		public AppCompatTextView mTxtSite;
+		public AppCompatTextView mTxtEmail;
+		public AppCompatTextView mTxtPassword;
 
 		public CardHolder(View itemView) {
 			super(itemView);

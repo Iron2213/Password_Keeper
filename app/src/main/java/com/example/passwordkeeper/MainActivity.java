@@ -23,6 +23,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDialog;
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.appcompat.widget.AppCompatEditText;
+import androidx.appcompat.widget.AppCompatTextView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -39,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
 
 	private RecyclerView mRecyclerView;
 	private RecyclerView.Adapter mAdapter;
-	private TextView mLblEmptyMessage;
+	private AppCompatTextView mTextView;
 	private SQLite_IO mDB_IO;
 
 	private RecyclerView.AdapterDataObserver mDataObserver = new RecyclerView.AdapterDataObserver() {
@@ -49,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
 			super.onChanged();
 
 			if (Utility.DataSet.size() < 1) {
-				mLblEmptyMessage.setVisibility(View.VISIBLE);
+				mTextView.setVisibility(View.VISIBLE);
 			}
 		}
 
@@ -58,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
 			super.onItemRangeInserted(positionStart, itemCount);
 
 			if (Utility.DataSet.size() > 0) {
-				mLblEmptyMessage.setVisibility(View.GONE);
+				mTextView.setVisibility(View.GONE);
 			}
 		}
 
@@ -67,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
 			super.onItemRangeRemoved(positionStart, itemCount);
 
 			if (Utility.DataSet.size() < 1) {
-				mLblEmptyMessage.setVisibility(View.VISIBLE);
+				mTextView.setVisibility(View.VISIBLE);
 			}
 		}
 	};
@@ -283,7 +287,7 @@ public class MainActivity extends AppCompatActivity {
 		mAdapter = new Adapter();
 		mRecyclerView.setAdapter(mAdapter);
 
-		mLblEmptyMessage = findViewById(R.id.lblEmptyMessage);
+		mTextView = findViewById(R.id.lblEmptyMessage);
 
 		setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
 
@@ -292,7 +296,7 @@ public class MainActivity extends AppCompatActivity {
 
 		// If the dataset has items inside it i hide the 'No passwords' message
 		if (Utility.DataSet.size() > 0) {
-			mLblEmptyMessage.setVisibility(View.GONE);
+			mTextView.setVisibility(View.GONE);
 		}
 
 		mAdapter.registerAdapterDataObserver(mDataObserver);
@@ -322,7 +326,7 @@ public class MainActivity extends AppCompatActivity {
 
 		switch (item.getItemId()) {
 			case R.id.addItem:
-				final Dialog dialog = new Dialog(mContextMainActivity);
+				final AppCompatDialog dialog = new AppCompatDialog(mContextMainActivity);
 				dialog.setContentView(R.layout.popup_window);
 
 				try {
@@ -331,17 +335,17 @@ public class MainActivity extends AppCompatActivity {
 					Toast.makeText(mContextMainActivity, ex.getMessage(), Toast.LENGTH_LONG).show();
 				}
 
-				Button btnCancel = dialog.findViewById(R.id.btnCancel);
-				Button btnSave = dialog.findViewById(R.id.btnSave);
+				AppCompatButton btnCancel = dialog.findViewById(R.id.btnCancel);
+				AppCompatButton btnSave = dialog.findViewById(R.id.btnSave);
 
 				// Listener for the save button
 				btnSave.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						String site = ((EditText) dialog.findViewById(R.id.txtSite)).getText().toString();
-						String email = ((EditText) dialog.findViewById(R.id.txtEmail)).getText().toString();
-						String password = ((EditText) dialog.findViewById(R.id.txtPassword)).getText().toString();
-						TextView lblError = dialog.findViewById(R.id.lblError);
+						String site = ((AppCompatEditText) dialog.findViewById(R.id.txtSite)).getText().toString();
+						String email = ((AppCompatEditText) dialog.findViewById(R.id.txtEmail)).getText().toString();
+						String password = ((AppCompatEditText) dialog.findViewById(R.id.txtPassword)).getText().toString();
+						AppCompatTextView lblError = dialog.findViewById(R.id.lblError);
 
 						// I take the current time and date
 						String formattedDate = new SimpleDateFormat("dd-MMM-yy").format(Calendar.getInstance().getTime());
