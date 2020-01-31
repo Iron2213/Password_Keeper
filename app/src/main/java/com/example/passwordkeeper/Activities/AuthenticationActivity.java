@@ -1,4 +1,4 @@
-package com.example.passwordkeeper;
+package com.example.passwordkeeper.Activities;
 
 import android.content.Context;
 import android.content.Intent;
@@ -6,12 +6,17 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageButton;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatTextView;
+
+import com.example.passwordkeeper.LocalDatabaseIO;
+import com.example.passwordkeeper.R;
 
 public class AuthenticationActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -20,10 +25,15 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		final Context context = this;
+		final LocalDatabaseIO localDB = new LocalDatabaseIO(context);
+		final int accessCode = localDB.getAccessCode();
+
+		if (localDB.isFirstAccess()) {
+			// TODO: Go to first time setup
+		}
 
 		setContentView(R.layout.authentication_activity);
-
-		final Context context = this;
 
 		mCode = findViewById(R.id.lblCode);
 		mCode.addTextChangedListener(new TextWatcher() {
@@ -32,10 +42,15 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
 			}
 
 			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count) {
-				if (s.toString().equals("1234")) {
-					Intent intent = new Intent(context, MainActivity.class);
-					startActivity(intent);
+			public void onTextChanged(CharSequence text, int start, int before, int count) {
+				if (text.toString().length() == 4) {
+					if (Integer.parseInt(text.toString()) == accessCode) {
+						Intent intent = new Intent(context, MainActivity.class);
+						startActivity(intent);
+					} else {
+						Animation shake = AnimationUtils.loadAnimation(context, R.anim.shake);
+						mCode.startAnimation(shake);
+					}
 				}
 			}
 
@@ -70,54 +85,57 @@ public class AuthenticationActivity extends AppCompatActivity implements View.On
 
 	@Override
 	public void onClick(View v) {
-		switch (v.getId()) {
-			case R.id.btnNum0:
-				mCode.append("0");
-				break;
+		String text = "" + mCode.getText();
 
-			case R.id.btnNum1:
-				mCode.append("1");
-				break;
+		if (text.length() < 4) {
+			switch (v.getId()) {
+				case R.id.btnNum0:
+					mCode.append("0");
+					break;
 
-			case R.id.btnNum2:
-				mCode.append("2");
-				break;
+				case R.id.btnNum1:
+					mCode.append("1");
+					break;
 
-			case R.id.btnNum3:
-				mCode.append("3");
-				break;
+				case R.id.btnNum2:
+					mCode.append("2");
+					break;
 
-			case R.id.btnNum4:
-				mCode.append("4");
-				break;
+				case R.id.btnNum3:
+					mCode.append("3");
+					break;
 
-			case R.id.btnNum5:
-				mCode.append("5");
-				break;
+				case R.id.btnNum4:
+					mCode.append("4");
+					break;
 
-			case R.id.btnNum6:
-				mCode.append("6");
-				break;
+				case R.id.btnNum5:
+					mCode.append("5");
+					break;
 
-			case R.id.btnNum7:
-				mCode.append("7");
-				break;
+				case R.id.btnNum6:
+					mCode.append("6");
+					break;
 
-			case R.id.btnNum8:
-				mCode.append("8");
-				break;
+				case R.id.btnNum7:
+					mCode.append("7");
+					break;
 
-			case R.id.btnNum9:
-				mCode.append("9");
-				break;
+				case R.id.btnNum8:
+					mCode.append("8");
+					break;
 
-			case R.id.btnDeleteLast:
-				String text = "" + mCode.getText();
-				if (text.length() > 0) {
-					text = text.substring(0, text.length() - 1);
-					mCode.setText(text);
-				}
-				break;
+				case R.id.btnNum9:
+					mCode.append("9");
+					break;
+			}
+		}
+
+		if (v.getId() == R.id.btnDeleteLast) {
+			if (text.length() > 0) {
+				text = text.substring(0, text.length() - 1);
+				mCode.setText(text);
+			}
 		}
 	}
 }

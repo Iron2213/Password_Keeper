@@ -1,4 +1,4 @@
-package com.example.passwordkeeper;
+package com.example.passwordkeeper.Activities;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -33,6 +33,11 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.passwordkeeper.Adapter;
+import com.example.passwordkeeper.Items;
+import com.example.passwordkeeper.LocalDatabaseIO;
+import com.example.passwordkeeper.R;
+import com.example.passwordkeeper.Utility;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Calendar;
@@ -44,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
 	private RecyclerView mRecyclerView;
 	private RecyclerView.Adapter mAdapter;
 	private AppCompatTextView mTextView;
-	private SQLite_IO mDB_IO;
+	private LocalDatabaseIO mDB_IO;
 
 	private RecyclerView.AdapterDataObserver mDataObserver = new RecyclerView.AdapterDataObserver() {
 
@@ -271,12 +276,7 @@ public class MainActivity extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		mDB_IO = new SQLite_IO(this);
-
-		// I get all the items from the local DB
-		if (Utility.DataSet == null) {
-			Utility.DataSet = mDB_IO.getAllData();
-		}
+		mDB_IO = new LocalDatabaseIO(this);
 
 		mRecyclerView = findViewById(R.id.rlvPasswords);
 		mRecyclerView.setHasFixedSize(true);
