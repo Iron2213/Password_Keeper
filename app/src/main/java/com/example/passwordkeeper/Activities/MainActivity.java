@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
 			}
 		}
 	};
-	private ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+	private ItemTouchHelper.SimpleCallback mSimpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
 		private Drawable mIconDelete = null;
 		private Drawable mIconEdit = null;
 		private int mImageSize = 60;
@@ -276,7 +276,7 @@ public class MainActivity extends AppCompatActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		mDB_IO = new LocalDatabaseIO(this);
+		mDB_IO = Utility.getDatabaseIO();
 
 		mRecyclerView = findViewById(R.id.rlvPasswords);
 		mRecyclerView.setHasFixedSize(true);
@@ -291,7 +291,7 @@ public class MainActivity extends AppCompatActivity {
 
 		setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
 
-		ItemTouchHelper touchHelper = new ItemTouchHelper(simpleItemTouchCallback);
+		ItemTouchHelper touchHelper = new ItemTouchHelper(mSimpleItemTouchCallback);
 		touchHelper.attachToRecyclerView(mRecyclerView);
 
 		// If the dataset has items inside it i hide the 'No passwords' message
@@ -422,5 +422,6 @@ public class MainActivity extends AppCompatActivity {
 	protected void onDestroy() {
 		super.onDestroy();
 		mAdapter.unregisterAdapterDataObserver(mDataObserver);
+		mDB_IO.close();
 	}
 }

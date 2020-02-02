@@ -22,7 +22,7 @@ public class LocalDatabaseIO extends SQLiteOpenHelper {
 
 	private class TablesCreateQueries {
 		static final String TABLE_PASSWORDS = "CREATE TABLE " + TablesNames.Passwords + "(Id integer PRIMARY KEY AUTOINCREMENT, Data date, Site text, Email text, Password text)";
-		static final String TABLE_SETTINGS = "CREATE TABLE " + TablesNames.Settings + "(Id integer PRIMARY KEY AUTOINCREMENT, AccessCode integer)";
+		static final String TABLE_SETTINGS = "CREATE TABLE " + TablesNames.Settings + "(Id integer PRIMARY KEY AUTOINCREMENT, AccessCode text)";
 	}
 
 	public LocalDatabaseIO(Context context) {
@@ -135,22 +135,22 @@ public class LocalDatabaseIO extends SQLiteOpenHelper {
 		}
 	}
 
-	public int getAccessCode() {
+	public String getAccessCode() {
 		try (SQLiteDatabase db = getReadableDatabase();
 			 Cursor result = db.rawQuery("SELECT * FROM " + TablesNames.Settings + " WHERE Id = 1", null)) {
 
 
 			if (result.moveToNext())
-				return result.getInt(1);
+				return result.getString(1);
 			else
-				return -1;
+				return "";
 		}
 	}
 
 	/**
 	 * This method updates or inserts in the database the user access code
 	 */
-	public boolean updateAccessCode(int AccessCode) {
+	public boolean updateAccessCode(String AccessCode) {
 		try (SQLiteDatabase db = getWritableDatabase()) {
 			ContentValues values = new ContentValues();
 			values.put("AccessCode", AccessCode);

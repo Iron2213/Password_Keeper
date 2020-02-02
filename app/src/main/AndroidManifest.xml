@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activities.AuthenticationActivity"
+            android:name=".Activities.Login_SetupActivity"
             android:noHistory="true"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"/>

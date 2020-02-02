@@ -15,17 +15,20 @@ public class SplashActivity extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		LocalDatabaseIO localDB = new LocalDatabaseIO(this);
+		Utility.setDatabaseIO(this);
+		LocalDatabaseIO localDB = Utility.getDatabaseIO();
 
 		Utility.DataSet = localDB.getAllData();
-		int accessCode = localDB.getAccessCode();
+		String accessCode = localDB.getAccessCode();
 
-		if (accessCode != -1)
-			Utility.setAccessCode(accessCode);
-		else
-			Toast.makeText(this, "An error occurred, unable to recover data. Please try again later...", Toast.LENGTH_LONG).show();
+		if (!localDB.isFirstAccess()) {
+			if (!accessCode.isEmpty())
+				Utility.setAccessCode(accessCode);
+			else
+				Toast.makeText(this, "An error occurred, unable to recover data. Please try again later...", Toast.LENGTH_LONG).show();
+		}
 
-		Intent intent = new Intent(this, AuthenticationActivity.class);
+		Intent intent = new Intent(this, Login_SetupActivity.class);
 		startActivity(intent);
 	}
 }
