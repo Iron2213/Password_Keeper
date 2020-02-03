@@ -81,8 +81,9 @@ public class AccessCodeFragment extends Fragment implements View.OnClickListener
 	public void onClick(View v) {
 		String text = "" + mLblCode.getText();
 
-		if (text.length() < 12) {
-			mLblCode.append(((AppCompatButton) v).getText());
+		if (Utility.getAccessCode().length() <= text.length()) {
+			text = "";
+			mLblCode.setText(text);
 		}
 
 		if (v.getId() == R.id.btnDeleteLast) {
@@ -90,6 +91,8 @@ public class AccessCodeFragment extends Fragment implements View.OnClickListener
 				text = text.substring(0, text.length() - 1);
 				mLblCode.setText(text);
 			}
+		} else if (text.length() < 12) {
+			mLblCode.append(((AppCompatButton) v).getText());
 		}
 	}
 }

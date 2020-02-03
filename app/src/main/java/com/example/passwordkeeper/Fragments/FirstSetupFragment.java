@@ -91,15 +91,13 @@ public class FirstSetupFragment extends Fragment implements View.OnClickListener
 	public void onClick(View v) {
 		String text = "" + mLblCode.getText();
 
-		if (text.length() < 12) {
-			mLblCode.append(((AppCompatButton) v).getText());
-		}
-
 		if (v.getId() == R.id.btnDeleteLast) {
 			if (text.length() > 0) {
 				text = text.substring(0, text.length() - 1);
 				mLblCode.setText(text);
 			}
+		} else if (text.length() < 12) {
+			mLblCode.append(((AppCompatButton) v).getText());
 		}
 	}
 }

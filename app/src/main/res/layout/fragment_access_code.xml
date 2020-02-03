@@ -38,7 +38,7 @@
 			android:inputType="numberPassword"
 			android:maxLength="12"
 			android:scrollHorizontally="true"
-			android:textSize="40sp" />
+			android:textSize="45sp" />
 
 	</androidx.appcompat.widget.LinearLayoutCompat>
 
