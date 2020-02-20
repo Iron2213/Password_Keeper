@@ -27,11 +27,16 @@ public class Adapter extends RecyclerView.Adapter<Adapter.CardHolder> {
 
 	@Override
 	public void onBindViewHolder(@NonNull Adapter.CardHolder holder, int position) {
+		if (!Utility.Settings.isShowLabelsOnItems()) {
+			holder.mLayLabels.setVisibility(View.GONE);
+			holder.mDateLabel.setVisibility(View.GONE);
+		}
+
 		holder.mCardView.setAnimation(AnimationUtils.loadAnimation(mContext, R.anim.item_spawn_animation));
 		holder.mInsertionDate.setText(Utility.DataSet.get(position).getInsertionDate());
-		holder.mTxtSite.setText(Utility.DataSet.get(position).getSite());
-		holder.mTxtEmail.setText(Utility.DataSet.get(position).getEmail());
-		holder.mTxtPassword.setText(Utility.DataSet.get(position).getPassword());
+		holder.mSite.setText(Utility.DataSet.get(position).getSite());
+		holder.mEmail.setText(Utility.DataSet.get(position).getEmail());
+		holder.mPassword.setText(Utility.DataSet.get(position).getPassword());
 	}
 	
 	@Override
@@ -42,19 +47,24 @@ public class Adapter extends RecyclerView.Adapter<Adapter.CardHolder> {
 	public class CardHolder extends RecyclerView.ViewHolder {
 
 		public CardView mCardView;
+		public androidx.appcompat.widget.LinearLayoutCompat mLayLabels;
+		public AppCompatTextView mDateLabel;
+
 		public AppCompatTextView mInsertionDate;
-		public AppCompatTextView mTxtSite;
-		public AppCompatTextView mTxtEmail;
-		public AppCompatTextView mTxtPassword;
+		public AppCompatTextView mSite;
+		public AppCompatTextView mEmail;
+		public AppCompatTextView mPassword;
 
 		public CardHolder(View itemView) {
 			super(itemView);
 
+			mDateLabel = itemView.findViewById(R.id.lblDateLabel);
+			mLayLabels = itemView.findViewById(R.id.layLabels);
 			mInsertionDate = itemView.findViewById(R.id.lblInsertionDate);
 			mCardView = itemView.findViewById(R.id.cardView);
-			mTxtSite = itemView.findViewById(R.id.lblSite);
-			mTxtEmail = itemView.findViewById(R.id.lblEmail);
-			mTxtPassword = itemView.findViewById(R.id.lblPassword);
+			mSite = itemView.findViewById(R.id.lblSite);
+			mEmail = itemView.findViewById(R.id.lblEmail);
+			mPassword = itemView.findViewById(R.id.lblPassword);
 		}
 	}
 }

@@ -3,6 +3,7 @@ package com.example.passwordkeeper.Activities;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -83,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
 	private ItemTouchHelper.SimpleCallback mSimpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
 		private Drawable mIconDelete = null;
 		private Drawable mIconEdit = null;
-		private int mImageSize = 60;
+		private int mImageSize = 128;
 
 		@Override
 		public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
@@ -95,10 +96,10 @@ public class MainActivity extends AppCompatActivity {
 			int deleteIconBottom = deleteIconTop + mImageSize;
 
 			if (mIconDelete == null)
-				mIconDelete = ContextCompat.getDrawable(viewHolder.itemView.getContext(), R.drawable.delete_icon);
+				mIconDelete = ContextCompat.getDrawable(viewHolder.itemView.getContext(), R.drawable.ic_delete_black);
 
 			if (mIconEdit == null)
-				mIconEdit = ContextCompat.getDrawable(viewHolder.itemView.getContext(), R.drawable.edit_icon);
+				mIconEdit = ContextCompat.getDrawable(viewHolder.itemView.getContext(), R.drawable.ic_edit_black);
 
 			if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
 				Paint p = new Paint();
@@ -294,7 +295,7 @@ public class MainActivity extends AppCompatActivity {
 		ItemTouchHelper touchHelper = new ItemTouchHelper(mSimpleItemTouchCallback);
 		touchHelper.attachToRecyclerView(mRecyclerView);
 
-		// If the dataset has items inside it i hide the 'No passwords' message
+		// If the data set has items inside it i hide the 'No passwords' message
 		if (Utility.DataSet.size() > 0) {
 			mTextView.setVisibility(View.GONE);
 		}
@@ -325,7 +326,7 @@ public class MainActivity extends AppCompatActivity {
 	public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
 		switch (item.getItemId()) {
-			case R.id.addItem:
+			case R.id.mnuAddItem:
 				final AppCompatDialog dialog = new AppCompatDialog(mContextMainActivity);
 				dialog.setContentView(R.layout.popup_window);
 
@@ -412,6 +413,11 @@ public class MainActivity extends AppCompatActivity {
 						})
 						.setNegativeButton("CANCEL", null)
 						.show();
+				break;
+
+			case R.id.mnuSettings:
+				Intent intent = new Intent(this, SettingsActivity.class);
+				startActivity(intent);
 				break;
 		}
 

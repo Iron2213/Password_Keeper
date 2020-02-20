@@ -1,14 +1,17 @@
 <resources>
+	<!-- Activities names -->
 	<string name="app_name">Password Keeper</string>
-	<string name="action_settings">Settings</string>
-	<string name="cardview_added_text">Added:</string>
-	<string name="cardview_site_text">Site:</string>
-	<string name="cardview_email_text">Email:</string>
-	<string name="cardview_password_text">Password:</string>
-	<string name="delete_saved_passwords_text">Delete saved passwords</string>
-	<string name="main_your_passwords_text">Your passwords:</string>
-	<string name="main_no_password_text">No password yet, let\'s add some!</string>
-	<string name="authentication_insert_code_text">Insert your code</string>
-	<string name="setup_greetings_text">Welcome to Password Keeper!</string>
-	<string name="setup_minimum_maximum_text">Minimum 4 digits, maximum 12</string>
+	<string name="settings">Settings</string>
+
+	<string name="added">Added:</string>
+	<string name="site">Site:</string>
+	<string name="email">Email:</string>
+	<string name="password">Password:</string>
+	<string name="delete_saved_passwords">Delete saved passwords</string>
+	<string name="your_passwords">Your passwords:</string>
+	<string name="no_password">No password yet, let\'s add some!</string>
+	<string name="insert_your_code">Insert your code</string>
+	<string name="greetings">Welcome to Password Keeper!</string>
+	<string name="minimum_maximum">Minimum 4 digits, maximum 12</string>
+	<string name="first_setup_message">To keep your passwords safe setup a security PIN</string>
 </resources>

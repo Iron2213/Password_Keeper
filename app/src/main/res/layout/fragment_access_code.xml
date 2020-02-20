@@ -24,7 +24,7 @@
 			android:layout_height="wrap_content"
 			android:layout_gravity="center_horizontal"
 			android:layout_marginTop="20dp"
-			android:text="@string/authentication_insert_code_text"
+			android:text="@string/insert_your_code"
 			android:textSize="18sp"
 			android:textStyle="bold" />
 

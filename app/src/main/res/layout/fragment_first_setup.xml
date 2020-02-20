@@ -10,13 +10,14 @@
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
 		android:layout_weight="1"
+		android:layout_marginHorizontal="8dp"
 		android:orientation="vertical">
 
 		<androidx.appcompat.widget.AppCompatImageView
 			android:layout_width="65dp"
 			android:layout_height="65dp"
 			android:layout_gravity="center_horizontal"
-			android:layout_marginTop="10dp"
+			android:layout_marginTop="25dp"
 			android:layout_weight="0.7"
 			android:src="@drawable/splash_screen" />
 
@@ -27,7 +28,7 @@
 			android:layout_marginTop="10dp"
 			android:layout_weight="0.3"
 			android:gravity="center"
-			android:text="@string/setup_greetings_text"
+			android:text="@string/greetings"
 			android:textSize="18sp" />
 
 		<androidx.appcompat.widget.AppCompatTextView
@@ -37,7 +38,7 @@
 			android:layout_marginTop="10dp"
 			android:layout_weight="0.3"
 			android:gravity="center"
-			android:text="To keep your passwords safe setup a security PIN"
+			android:text="@string/first_setup_message"
 			android:textSize="18sp" />
 
 		<androidx.appcompat.widget.AppCompatTextView
@@ -46,7 +47,7 @@
 			android:layout_height="wrap_content"
 			android:layout_gravity="center_horizontal"
 			android:gravity="center"
-			android:text="@string/setup_minimum_maximum_text"
+			android:text="@string/minimum_maximum"
 			android:textSize="18sp" />
 
 		<androidx.appcompat.widget.AppCompatTextView
@@ -54,7 +55,7 @@
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:layout_marginHorizontal="15dp"
-			android:layout_marginTop="25dp"
+			android:layout_marginTop="20dp"
 			android:layout_weight="1"
 			android:gravity="center"
 			android:inputType="numberPassword"
@@ -176,6 +177,7 @@
 			android:layout_height="@dimen/numPad_button_size"
 			android:background="@drawable/round_button"
 			android:src="@android:drawable/ic_input_delete"
+			android:tint="?android:attr/textColorPrimary"
 			android:text="3"
 			android:textSize="30sp" />
 

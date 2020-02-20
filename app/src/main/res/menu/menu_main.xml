@@ -1,18 +1,24 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.example.passwordkeeper.Activities.MainActivity">
-    <item
-        android:id="@+id/addItem"
-        android:icon="@drawable/ic_add"
-        android:iconTint="@color/colorAccent"
-        android:iconTintMode="src_atop"
-        app:showAsAction="ifRoom"
-        android:title="New item" />
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	tools:context="com.example.passwordkeeper.Activities.MainActivity">
 
-    <item
-        android:id="@+id/mnuEmptyTable"
-        app:showAsAction="never"
-        android:title="@string/delete_saved_passwords_text" />
+	<item
+		android:id="@+id/mnuAddItem"
+		android:icon="@drawable/ic_add_white"
+		android:iconTint="@android:color/white"
+		android:iconTintMode="src_atop"
+		android:title="New item"
+		app:showAsAction="ifRoom" />
+
+	<item
+		android:id="@+id/mnuEmptyTable"
+		android:title="@string/delete_saved_passwords"
+		app:showAsAction="never" />
+
+	<item
+		android:id="@+id/mnuSettings"
+		android:title="@string/settings"
+		app:showAsAction="never" />
 
 </menu>
