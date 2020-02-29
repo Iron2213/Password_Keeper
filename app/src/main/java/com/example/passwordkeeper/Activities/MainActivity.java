@@ -2,7 +2,6 @@ package com.example.passwordkeeper.Activities;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -22,7 +21,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDialog;
 import androidx.appcompat.widget.AppCompatButton;
@@ -53,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
 	private LocalDatabaseIO mDB_IO;
 
 	private RecyclerView.AdapterDataObserver mDataObserver = new RecyclerView.AdapterDataObserver() {
-
 		@Override
 		public void onChanged() {
 			super.onChanged();
@@ -84,13 +81,13 @@ public class MainActivity extends AppCompatActivity {
 	private ItemTouchHelper.SimpleCallback mSimpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
 		private Drawable mIconDelete = null;
 		private Drawable mIconEdit = null;
-		private int mImageSize = 128;
 
 		@Override
 		public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
 			View itemView = viewHolder.itemView;
 
 			int itemHeight = itemView.getBottom() - itemView.getTop();
+			int mImageSize = 128;
 			int deleteIconTop = itemView.getTop() + (itemHeight - mImageSize) / 2;
 			int deleteIconMargin = (itemHeight - mImageSize) / 2;
 			int deleteIconBottom = deleteIconTop + mImageSize;
@@ -248,7 +245,7 @@ public class MainActivity extends AppCompatActivity {
 								mAdapter.notifyDataSetChanged();
 								dialog.dismiss();
 							} else {
-								lblError.setText("Email and password cannot be empty");
+								lblError.setText(R.string.error_email_password_empty);
 							}
 
 						}
@@ -312,13 +309,6 @@ public class MainActivity extends AppCompatActivity {
 
 	@Override
 	public boolean onPrepareOptionsMenu(Menu menu) {
-
-		if (Utility.DataSet.size() < 1) {
-			menu.findItem(R.id.mnuEmptyTable).setEnabled(false);
-		} else {
-			menu.findItem(R.id.mnuEmptyTable).setEnabled(true);
-		}
-
 		return super.onPrepareOptionsMenu(menu);
 	}
 
@@ -372,13 +362,13 @@ public class MainActivity extends AppCompatActivity {
 								dialog.dismiss();
 							} else {
 								lblError.setVisibility(View.VISIBLE);
-								lblError.setText("A problem occurred, unable to add item");
+								lblError.setText(R.string.error_add_item);
 							}
 
 
 						} else {
 							lblError.setVisibility(View.VISIBLE);
-							lblError.setText("Email and password cannot be empty");
+							lblError.setText(R.string.error_email_password_empty);
 						}
 					}
 				});
@@ -392,27 +382,6 @@ public class MainActivity extends AppCompatActivity {
 				});
 
 				dialog.show();
-				break;
-
-			case R.id.mnuEmptyTable:
-				new AlertDialog.Builder(this)
-						.setTitle("Delete all passwords")
-						.setIcon(android.R.drawable.ic_dialog_alert)
-						.setMessage("Are you sure you want to delete all the passwords?\n(This action is irreversible)")
-						.setPositiveButton("DELETE", new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog, int which) {
-
-								// I empty the dataset and local DB
-								Utility.DataSet.clear();
-								mDB_IO.deleteAllItems();
-
-								// I notify that the items in the dataset have been deleted
-								mAdapter.notifyDataSetChanged();
-								Toast.makeText(mContextMainActivity, "All passwords have been deleted", Toast.LENGTH_LONG).show();
-							}
-						})
-						.setNegativeButton("CANCEL", null)
-						.show();
 				break;
 
 			case R.id.mnuSettings:

@@ -9,6 +9,7 @@ import android.view.animation.AnimationUtils;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.cardview.widget.CardView;
+import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class Adapter extends RecyclerView.Adapter<Adapter.CardHolder> {
@@ -27,7 +28,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.CardHolder> {
 
 	@Override
 	public void onBindViewHolder(@NonNull Adapter.CardHolder holder, int position) {
-		if (!Utility.Settings.isShowLabelsOnItems()) {
+		if (PreferenceManager.getDefaultSharedPreferences(mContext).getBoolean("labels_hide", false)) {
 			holder.mLayLabels.setVisibility(View.GONE);
 			holder.mDateLabel.setVisibility(View.GONE);
 		}

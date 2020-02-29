@@ -14,4 +14,14 @@
 	<string name="greetings">Welcome to Password Keeper!</string>
 	<string name="minimum_maximum">Minimum 4 digits, maximum 12</string>
 	<string name="first_setup_message">To keep your passwords safe setup a security PIN</string>
+	<string name="title_activity_settings2">Settings</string>
+	<string name="labels_visibility">Hide labels on items</string>
+
+	<!-- Preference Titles -->
+	<string name="security_header">Security</string>
+	<string name="labels_header">Labels</string>
+
+	<!-- Error messages -->
+	<string name="error_add_item">A problem occurred, unable to add item</string>
+	<string name="error_email_password_empty">Email and password cannot be empty</string>
 </resources>

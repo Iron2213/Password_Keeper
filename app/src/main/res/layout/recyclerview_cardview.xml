@@ -77,7 +77,6 @@
 					android:textSize="16sp"
 					android:textStyle="bold" />
 
-
 			</androidx.appcompat.widget.LinearLayoutCompat>
 
 			<androidx.appcompat.widget.LinearLayoutCompat

@@ -1,0 +1,25 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+	<PreferenceCategory app:title="@string/labels_header">
+
+		<SwitchPreferenceCompat
+			app:key="labels_hide"
+			app:title="@string/labels_visibility" />
+
+	</PreferenceCategory>
+
+	<PreferenceCategory
+		app:key="security"
+		app:title="@string/security_header">
+
+		<Preference
+			app:key="change_code"
+			app:title="Change access code" />
+
+	</PreferenceCategory>
+
+	<Preference
+		app:key="delete_all"
+		app:title="Delete saved items" />
+
+</PreferenceScreen>

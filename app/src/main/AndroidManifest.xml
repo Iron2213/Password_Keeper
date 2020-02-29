@@ -19,7 +19,7 @@
 		<activity
 			android:name=".Activities.SplashActivity"
 			android:noHistory="true"
-			android:screenOrientation="portrait"
+			android:screenOrientation="fullSensor"
 			android:theme="@style/AppTheme.Splash">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
@@ -30,7 +30,7 @@
 		<activity
 			android:name=".Activities.Login_SetupActivity"
 			android:noHistory="true"
-			android:screenOrientation="portrait"
+			android:screenOrientation="fullSensor"
 			android:theme="@style/AppTheme.NoActionBar" />
 		<activity
 			android:name=".Activities.MainActivity"

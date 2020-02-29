@@ -12,11 +12,6 @@
 		app:showAsAction="ifRoom" />
 
 	<item
-		android:id="@+id/mnuEmptyTable"
-		android:title="@string/delete_saved_passwords"
-		app:showAsAction="never" />
-
-	<item
 		android:id="@+id/mnuSettings"
 		android:title="@string/settings"
 		app:showAsAction="never" />
